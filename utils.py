@@ -218,4 +218,52 @@ def Jeudevie_grph(Z):
                   + str(i))
         plt.show()
 
+## Fonction 10::
+class JeuDeLaVie:
+
+    def __init__(self, init_state, _time_T):
+        self.init_state = init_state # initialisation de self
+        self.n_1 = init_state.shape[0] # creation des deux dimension 
+        self.n_2 = init_state.shape[1]
+        self._historic_state = np.ndarray((self.n_1, self.n_2, _time_T+1))
+        self._historic_state[:, :, 0] = self.init_state 
+    def play(self):
+        t = 1
+        while(t <= self._time_T):
+            self._historic_state[:, :, t-1] = \
+                iteration_jeu_np(self._historic_state[:, :, t])
+            self.average_life = np.mean(self._historic_state, axis=(2))
+            t = t + 1
+
+    def __plot__(self, init_state, _time_T):
+        """Cette fonction permet de jouer le jeux de la vie jusqu'à _time_T et stocke dans la le tranche du
+           tenseur, l'état du jeu au temps t pour tous les t de 0 à _time_T. On mettra aussi à jour l'attribut
+           average_life qui permet de visualiser le temps de vie moyen de chaque cellule au cours du jeu
+        """   
+        self.average_life = 1/_time_T*self.average_life
+        fig, ax = plt.subplots()
+        plt.imshow(self.average_life)
+        fig.suptitle()
+        plt.show()
+        self.init_state = init_state
+        self._time_T = _time_T
+        self._dimension = (n_1, n_2) = init_state.shape
+        self._historic_state = np.zeros((n_1, n_2, _time_T+1))
+        self._historic_state[:, :, 0] = self.init_state
+        self.average_life = np.zeros((n_1, n_2))
+
+    def play(self):
+        """affiche la matrice average_life avec la palette viridis.
+        """
+        t = 1
+        while(t <= self._time_T):
+            self._historic_state[:, :, t] = iteration_jeu_np(
+                self._historic_state[:, :, t-1]) 
+            self.average_life = np.mean(self._historic_state, axis=(2))
+            t += 1
+
+    def plot(self):
+        display_one_plot(
+            self.average_life, "10".format(self._time_T))
+        plt.colorbar()
 
