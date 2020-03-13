@@ -114,6 +114,7 @@ def calcul_nb_voisins_np(Z):
 
 
 ## Fonction.05::
+
 def iteration_jeu_np(Z):
     """Cette fonction permet de réaliser une itération de jeu rapide.
 
@@ -166,64 +167,55 @@ def jeu_np(Z_in, nb_iter):
     else:
         return(jeu_np(iteration_jeu_np(Z_in), nb_iter-1))
     
-## Fonction.06::
+## Fonction.07::
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def anim_game(im_init, fct_update, frames_nb, title):
-    """Display the animation for the game from an initial grid.
-    Keyword arguments:
-        im_init -- 2D numpy array (binary for the game of life)
-        fct_update -- the function which will update the data
-                        in the grid for each iteration
-        frames_nb -- int or iterable
-                (for more : see matplotlib.animation.FuncAnimation help)
-        title -- a string for the title of the movie.
+def jeudevie(init, msj):
+    """Cette fonction permet de faire l'animation de jeu de la vie.
+    
+    Les paramétres
+    --------------
+        init : tableau initial (on peut dire que c'est "le plan" dans laquel on va faire l'animation)
+        msj : tableau de même dimension que le tableau initial.
     """
-    plt.figure(num=title)
+    plt.figure()
     fig = plt.gcf()
-    im = plt.imshow(im_init, cmap='cool')
+    shw = plt.imshow(init)
+    plt.title(" Jeu de la vie avec Z_huge")
     plt.show()
 
-    def animate(frame):
-        im.set_data(fct_update(im_init))
-        return im,
+    def animate():
+        shw.set_data(msj(init))
+        return shw,
 
-    anim = animation.FuncAnimation(fig, animate, frames=frames_nb)
+    anim = FuncAnimation(fig, animate,frames=200, interval=20, blit=True)
     return(anim)
+
+## Fonction.08::
+def animate(i):
+    jeu_np(Z_huge, 1)
+    shw = plt.imshow(Z_huge)
+    return shw,
+
+## Fonction.09::
+
+def Jeudevie_grph(Z):
+    """cette fonction permet d'afficher les 10 premières itérations de jeu de la vie.
+    
+    Les paramétres
+    --------------
+        Z : tableau numpy (matrice)
+        
+    """
+    fig, ax = plt.subplots()
+    plt.imshow(np.array(Z))
+    plt.title("Jeu de la vie après l'itr")
+    for i in range(1, 10):
+        fig, ax = plt.subplots()
+        iteration_jeu_np(Z)
+        A = np.array(Z)
+        plt.imshow(A)
+        plt.title("Jeu de la vie après l'itr " 
+                  + str(i))
+        plt.show()
+
 
