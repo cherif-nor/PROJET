@@ -10,7 +10,7 @@ Contributeurs : AMGHAR CHERIF
 
 Professeur : Joseph Salmon, Benjamin Charlier
 
-M1 Biostatistiques S2 - 2018/2019
+M1 MIND S2 - 2019/2020
 
 Sujet : TP1
 ###########################################################################################
@@ -34,10 +34,6 @@ Les ennoncés et les questions des exercices se trouvent dans le "sujet", plus h
 Le fichier HMMA238_TP_prenomnom.ipynb comprend également ces ennoncés et questions, pour une meilleure compréhension.
 
 Nous avons écrit les fonctions importantes dans le fichier utils.py, qui seront appelées depuis le notebook.
-
-Le dépôt GitHub contient, en plus de cela, un fichier avec quelques images utilisées dans le notebook, ainsi que le film créé pour l'exercice 2.
-
-- Attaque du premier exercice - LE JEU DE LA VIE
 
 Courte description :
 
